@@ -7,16 +7,16 @@ namespace Tarefas.Web.Controllers
 {
     public class TarefaController : Controller
     {
+        private TarefaDAO tarefaDAO;
         public List<Tarefa> listaDeTarefas { get; set; }
 
         public TarefaController()
         {
-         
+            tarefaDAO = new TarefaDAO();
         }
         
         public IActionResult Details(int id)
         {
-            var tarefaDAO = new TarefaDAO();
             var tarefaDTO = tarefaDAO.Consultar(id);
 
             var tarefa=new Tarefa()
@@ -32,7 +32,6 @@ namespace Tarefas.Web.Controllers
 
         public IActionResult Index()
         {   
-            var tarefaDAO = new TarefaDAO();
             var listaDeTarefasDTO = tarefaDAO.Consultar();
 
             var listaDeTarefas = new List<Tarefa>();
@@ -67,7 +66,6 @@ namespace Tarefas.Web.Controllers
                 Concluida = tarefa.Concluida
             };
 
-            var tarefaDAO = new TarefaDAO();
             tarefaDAO.Criar(tarefaDTO);
 
             return RedirectToAction("Index");
@@ -75,7 +73,6 @@ namespace Tarefas.Web.Controllers
         
         public IActionResult Update(int id)
         {
-            var tarefaDAO = new TarefaDAO();
             var tarefaDTO = tarefaDAO.Consultar(id);
 
             var tarefa = new Tarefa()
@@ -100,7 +97,6 @@ namespace Tarefas.Web.Controllers
                 Concluida = tarefa.Concluida
             };
 
-            var tarefaDAO = new TarefaDAO();
             tarefaDAO.Atualizar(tarefaDTO);
 
             return RedirectToAction("Index");
@@ -108,7 +104,6 @@ namespace Tarefas.Web.Controllers
 
         public IActionResult Delete(int id)
         {
-            var tarefaDAO = new TarefaDAO();
             tarefaDAO.Excluir(id);
 
             return RedirectToAction("Index");
