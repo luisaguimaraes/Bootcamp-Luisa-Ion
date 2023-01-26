@@ -70,7 +70,7 @@ namespace Tarefas.Web.Controllers
             var tarefaDAO = new TarefaDAO();
             tarefaDAO.Criar(tarefaDTO);
 
-            return View();
+            return RedirectToAction("Index");
         }
         
         public IActionResult Update(int id)
@@ -110,7 +110,7 @@ namespace Tarefas.Web.Controllers
         {
             var tarefaDAO = new TarefaDAO();
             tarefaDAO.Excluir(id);
-            
+
             return RedirectToAction("Index");
         }
     }
