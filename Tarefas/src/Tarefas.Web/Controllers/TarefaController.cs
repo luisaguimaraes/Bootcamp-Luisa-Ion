@@ -26,7 +26,24 @@ namespace Tarefas.Web.Controllers
         }
 
         public IActionResult Index()
-        {            
+        {   
+            var tarefaDAO = new TarefaDAO();
+            var listaDeTarefasDTO = tarefaDAO.Consultar();
+
+            var listaDeTarefas = new List<Tarefa>();
+            
+            foreach (var tarefaDTO in listaDeTarefasDTO)
+            {
+                listaDeTarefas.Add(new Tarefa()
+                {
+                Id=tarefaDTO.Id,
+                Titulo=tarefaDTO.Titulo,
+                Descricao=tarefaDTO.Descricao,
+                Concluida=tarefaDTO.Concluida
+                });
+            }
+
+
             return View(listaDeTarefas);
         }
 
@@ -50,5 +67,7 @@ namespace Tarefas.Web.Controllers
 
             return View();
         }
+
+
     }
 }

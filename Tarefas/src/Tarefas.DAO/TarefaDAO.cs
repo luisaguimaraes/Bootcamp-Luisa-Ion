@@ -49,6 +49,16 @@ namespace Tarefas.DAO
                 );
             }
         }
-        
+        public List<TarefaDTO>Consultar()
+        {
+            using (var con = Connection)
+            {
+                con.Open();
+                var result = con.Query<TarefaDTO>(
+                    @"SELECT Id, Titulo, Descricao, Concluida FROM Tarefa"
+                ).ToList();
+                return result;
+            }
+        }
     }
 }
