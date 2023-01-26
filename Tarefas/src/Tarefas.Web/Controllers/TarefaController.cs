@@ -8,7 +8,7 @@ namespace Tarefas.Web.Controllers
     public class TarefaController : Controller
     {
         private TarefaDAO tarefaDAO;
-        public List<Tarefa> listaDeTarefas { get; set; }
+        public List<TarefaViewModel> listaDeTarefas { get; set; }
 
         public TarefaController()
         {
@@ -19,7 +19,7 @@ namespace Tarefas.Web.Controllers
         {
             var tarefaDTO = tarefaDAO.Consultar(id);
 
-            var tarefa=new Tarefa()
+            var tarefa=new TarefaViewModel()
             {
                 Id=tarefaDTO.Id,
                 Titulo=tarefaDTO.Titulo,
@@ -34,11 +34,11 @@ namespace Tarefas.Web.Controllers
         {   
             var listaDeTarefasDTO = tarefaDAO.Consultar();
 
-            var listaDeTarefas = new List<Tarefa>();
+            var listaDeTarefas = new List<TarefaViewModel>();
             
             foreach (var tarefaDTO in listaDeTarefasDTO)
             {
-                listaDeTarefas.Add(new Tarefa()
+                listaDeTarefas.Add(new TarefaViewModel()
                 {
                 Id=tarefaDTO.Id,
                 Titulo=tarefaDTO.Titulo,
@@ -57,7 +57,7 @@ namespace Tarefas.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Tarefa tarefa)
+        public IActionResult Create(TarefaViewModel tarefa)
         {
             var tarefaDTO = new TarefaDTO 
             {
@@ -75,7 +75,7 @@ namespace Tarefas.Web.Controllers
         {
             var tarefaDTO = tarefaDAO.Consultar(id);
 
-            var tarefa = new Tarefa()
+            var tarefa = new TarefaViewModel()
             {
                 Id = tarefaDTO.Id,
                 Titulo = tarefaDTO.Titulo,
@@ -87,7 +87,7 @@ namespace Tarefas.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Tarefa tarefa)
+        public IActionResult Update(TarefaViewModel tarefa)
         {
             var tarefaDTO = new TarefaDTO 
             {
