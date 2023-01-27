@@ -68,6 +68,11 @@ namespace Tarefas.Web.Controllers
 
             tarefaDAO.Criar(tarefaDTO);
 
+            // if(!ModelState.IsValid)
+            // {
+            //     return View();
+            // }
+
             return RedirectToAction("Index");
         }
         
@@ -83,6 +88,10 @@ namespace Tarefas.Web.Controllers
                 Concluida = tarefaDTO.Concluida
             };
             
+            //   if(!ModelState.IsValid)
+            // {
+            //     return View();
+            // }
             return View(tarefa);
         }
 
