@@ -10,7 +10,7 @@ namespace Tarefas.Web.Controllers
     {
         private readonly IMapper _mapper;
         private readonly ITarefaDAO _tarefaDAO;
-        public List<TarefaViewModel> listaDeTarefas { get; set; }
+        // public List<TarefaViewModel> listaDeTarefas { get; set; }
 
         public TarefaController (ITarefaDAO tarefaDAO, IMapper mapper)
         {
