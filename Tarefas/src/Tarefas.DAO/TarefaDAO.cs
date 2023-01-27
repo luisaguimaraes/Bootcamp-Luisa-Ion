@@ -6,23 +6,23 @@ using System.Linq;
 using Tarefas.DTO;
 
 namespace Tarefas.DAO
-{
-    public class TarefaDAO
+{  
+    public class TarefaDAO : ITarefaDAO
     {
         private string DataSourceFile => Environment.CurrentDirectory + "AppTarefasDB.sqlite";
-        public SQLiteConnection Connection => new SQLiteConnection("DataSource="+ DataSourceFile);
-        
+        public SQLiteConnection Connection => new SQLiteConnection("DataSource=" + DataSourceFile);
+
         public TarefaDAO()
         {
-            if(!File.Exists(DataSourceFile))
+            if (!File.Exists(DataSourceFile))
             {
                 CreateDatabase();
             }
         }
-        
+
         private void CreateDatabase()
         {
-            using(var con = Connection)
+            using (var con = Connection)
             {
                 con.Open();
                 con.Execute(
@@ -49,7 +49,7 @@ namespace Tarefas.DAO
                 );
             }
         }
-        public List<TarefaDTO>Consultar()
+        public List<TarefaDTO> Consultar()
         {
             using (var con = Connection)
             {
@@ -68,7 +68,7 @@ namespace Tarefas.DAO
                 con.Open();
                 var result = con.Query<TarefaDTO>(
                     @"SELECT * FROM Tarefa
-                    WHERE Id = @Id", new {id}
+                    WHERE Id = @Id", new { id }
                 ).FirstOrDefault();
                 return result;
             }
@@ -90,7 +90,7 @@ namespace Tarefas.DAO
             }
         }
 
-         public void Excluir(int id)
+        public void Excluir(int id)
         {
             using (var con = Connection)
             {
@@ -98,7 +98,7 @@ namespace Tarefas.DAO
                 con.Execute
                 (
                     @"DELETE FROM Tarefa
-                    WHERE Id = @Id", new {id}
+                    WHERE Id = @Id", new { id }
                 );
             }
         }
