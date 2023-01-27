@@ -100,13 +100,7 @@ namespace Tarefas.Web.Controllers
                 return View();
             }
             
-            var tarefaDTO = new TarefaDTO 
-            {
-                Id = tarefa.Id,
-                Titulo = tarefa.Titulo,
-                Descricao = tarefa.Descricao,
-                Concluida = tarefa.Concluida
-            };
+            var tarefaDTO = _mapper.Map<TarefaDTO>(tarefa);
 
             _tarefaDAO.Atualizar(tarefaDTO);
 
